@@ -4,7 +4,7 @@ on:
   issue_comment:
     types: [created]
   pull_request_target:
-    types: [opened, closed, synchronize]
+    types: [opened, synchronize, reopened]
 
 permissions:
   actions: write
@@ -17,32 +17,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: CLA Assistant
-        if: |
-          (github.event.comment.body == 'I have read the CLA Document and I hereby sign the CLA' ||
-          github.event.comment.body == 'recheck') &&
-          github.event_name == 'issue_comment' ||
-          github.event_name == 'pull_request_target'
-        uses: contributor-assistant/github-action@v2.6.1
+        uses: trustgraph-ai/contributor-license-agreement/action@main
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PERSONAL_ACCESS_TOKEN: ${{ secrets.CLA_ASSISTANT_PAT }}
         with:
-          path-to-signatures: 'signatures/cla.json'
-          path-to-document: 'https://github.com/trustgraph-ai/contributor-license-agreement/blob/main/README.md'
-          branch: 'main'
-          remote-repository-name: 'contributor-license-agreement'
-          remote-organization-name: 'trustgraph-ai'
-          custom-pr-sign-comment: 'I have read the CLA Document and I hereby sign the CLA'
-          custom-notsigned-prcomment: |
-            ## Contributor License Agreement
-
-            Before we can accept your contribution, please sign our CLA.
-
-            Please read the appropriate agreement:
-            - Contributing as an **individual**? Read the [Individual CLA](https://github.com/trustgraph-ai/contributor-license-agreement/blob/main/Fiduciary-Contributor-License-Agreement.md)
-            - Contributing on behalf of a **company or organisation**? Read the [Entity CLA](https://github.com/trustgraph-ai/contributor-license-agreement/blob/main/Entity-Fiduciary-Contributor-License-Agreement.md)
-
-            Once you have read the agreement, **reply to this PR with this exact comment**:
-
-            `I have read the CLA Document and I hereby sign the CLA`
           allowlist: 'dependabot,dependabot[bot],github-actions,github-actions[bot]'
