@@ -33,4 +33,16 @@ jobs:
           remote-repository-name: 'contributor-license-agreement'
           remote-organization-name: 'trustgraph-ai'
           custom-pr-sign-comment: 'I have read the CLA Document and I hereby sign the CLA'
+          custom-notsigned-prcomment: |
+            ## Contributor License Agreement
+
+            Before we can accept your contribution, please sign our CLA.
+
+            Please read the appropriate agreement:
+            - Contributing as an **individual**? Read the [Individual CLA](https://github.com/trustgraph-ai/contributor-license-agreement/blob/main/Fiduciary-Contributor-License-Agreement.md)
+            - Contributing on behalf of a **company or organisation**? Read the [Entity CLA](https://github.com/trustgraph-ai/contributor-license-agreement/blob/main/Entity-Fiduciary-Contributor-License-Agreement.md)
+
+            Once you have read the agreement, **reply to this PR with this exact comment**:
+
+            `I have read the CLA Document and I hereby sign the CLA`
           allowlist: 'dependabot,dependabot[bot],github-actions,github-actions[bot]'
